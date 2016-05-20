@@ -11,12 +11,13 @@ class JbossFuse < Formula
 
   def install
     rm_f Dir["bin/*.bat"]
-    prefix.install Dir["*"]
+    libexec.install Dir["*"]
+    # Must be installed to libexec because `start`, `stop`, etc should not be symlinked
   end
 
   def caveats; <<-EOS.undent
     The home of JBoss Fuse is:
-      #{opt_prefix}
+      #{opt_libexec}
     Note: The support scripts used by JBoss Fuse have
     very generic names. These are likely to conflict with support scripts
     used by other Java-based server software. Hence they are *NOT* linked
